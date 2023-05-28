@@ -1,4 +1,11 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
+import { cp } from 'fs';
 import { Quote } from './models';
 import { QuoteService } from './quote.service';
 
@@ -12,11 +19,15 @@ export class QuoteController {
   }
 
   @Get(':id')
-  get(@Param('id') id: number): Quote | undefined {
-    return this.quoteService.findOne(id);
+  get(@Param('id', ParseIntPipe) id: number): Quote | undefined {
+    const quote = this.quoteService.findOne(id);
+    if (!quote) {
+      throw new NotFoundException('Quote not found');
+    }
+    return quote;
   }
 
-  @Get()
+  @Get('all')
   getAll(): Quote[] {
     return this.quoteService.findAll();
   }
