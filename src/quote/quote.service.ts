@@ -5,8 +5,11 @@ import officeQuotes from '../data/office_quotes.json';
 @Injectable()
 export class QuoteService {
   private data: Quote[] = officeQuotes;
+  private count = 0;
 
-  constructor() {}
+  constructor() {
+    this.count = this.data.length;
+  }
 
   findRandom(): Quote {
     return this.data[Math.floor(Math.random() * this.data.length)];
@@ -16,7 +19,13 @@ export class QuoteService {
     return this.data.find((quote) => quote.quote_id === id);
   }
 
-  findAll(): Quote[] {
-    return this.data;
+  findAll(page: number, limit: number): Quote[] {
+    const startIndex = (page - 1) * limit;
+    const quotes = this.data.slice(startIndex, startIndex + limit);
+    return quotes;
+  }
+
+  getCount(): number {
+    return this.count;
   }
 }

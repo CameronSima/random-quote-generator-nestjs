@@ -29,8 +29,8 @@ describe('QuoteService', () => {
   });
 
   it('should return all quotes', () => {
-    const quotes = service.findAll();
+    const quotes = service.findAll(1, 10);
     expect(quotes).toBeDefined();
-    expect(quotes.length).toBeGreaterThan(0);
+    expect(quotes.length).toBe(10);
   });
 });

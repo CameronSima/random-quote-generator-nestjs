@@ -54,12 +54,80 @@ describe('QuoteController (e2e)', () => {
       .get('/quote/not-a-number')
       .expect(400)
       .expect((res) => {
-        console.log(res.body);
         expect(res.body).toBeDefined();
         expect(res.body.message).toBe(
           'Validation failed (numeric string is expected)',
         );
         expect(res.body.error).toBe('Bad Request');
+      });
+  });
+
+  it('/quote/all (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/quote/all')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(res.body.data.length).toBe(10);
+      });
+  });
+
+  it('/quote/all (GET) pagination', () => {
+    return request(app.getHttpServer())
+      .get('/quote/all?page=2&limit=25')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(res.body.data[0].quote_id).toBe(25);
+        expect(res.body.data.length).toBe(25);
+        expect(res.body.meta.page).toBe(2);
+        expect(res.body.meta.limit).toBe(25);
+        expect(res.body.meta.count).toBe(25);
+      });
+  });
+
+  it('/quote/all (GET) pagination (bad query params)', () => {
+    return request(app.getHttpServer())
+      .get('/quote/all?page=foo&limit=bar')
+      .expect(400)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(
+          res.body.message.includes(
+            'limit must be a number conforming to the specified constraints',
+          ),
+        ).toBeTruthy();
+        expect(
+          res.body.message.includes(
+            'page must be a number conforming to the specified constraints',
+          ),
+        ).toBeTruthy();
+      });
+  });
+
+  it('/quote/all (GET) pagination (excessive page size)', () => {
+    return request(app.getHttpServer())
+      .get('/quote/all?limit=999')
+      .expect(400)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(res.body.error).toBe('Bad Request');
+        expect(
+          res.body.message.includes('limit must not be greater than 100'),
+        ).toBeTruthy();
+      });
+  });
+
+  it('/quote/all (GET) pagination (end of pages)', () => {
+    return request(app.getHttpServer())
+      .get('/quote/all?page=999')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(res.body.data.length).toBe(0);
+        expect(res.body.meta.page).toBe(999);
+        expect(res.body.meta.limit).toBe(10);
+        expect(res.body.meta.count).toBe(0);
       });
   });
 });

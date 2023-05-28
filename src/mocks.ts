@@ -28,4 +28,8 @@ export class MockQuoteService {
   findRandom(): any {
     return this.quotes[Math.floor(Math.random() * this.quotes.length)];
   }
+
+  getCount(): number {
+    return this.quotes.length;
+  }
 }
