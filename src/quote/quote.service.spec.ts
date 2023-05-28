@@ -17,19 +17,19 @@ describe('QuoteService', () => {
   });
 
   it('should return a random quote', () => {
-    const quote = service.getRandom();
+    const quote = service.findRandom();
     expect(quote).toBeDefined();
   });
 
   it('should return a quote by id', () => {
-    const quote = service.get(21);
+    const quote = service.findOne(21);
     expect(quote).toBeDefined();
     expect(quote?.quote_id).toBe(21);
     expect(quote?.quote).toBe('God, yeah… Ah! This…');
   });
 
   it('should return all quotes', () => {
-    const quotes = service.getAll();
+    const quotes = service.findAll();
     expect(quotes).toBeDefined();
     expect(quotes.length).toBeGreaterThan(0);
   });

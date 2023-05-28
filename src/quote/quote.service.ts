@@ -8,15 +8,15 @@ export class QuoteService {
 
   constructor() {}
 
-  getRandom(): Quote {
+  findRandom(): Quote {
     return this.data[Math.floor(Math.random() * this.data.length)];
   }
 
-  get(id: number): Quote | undefined {
+  findOne(id: number): Quote | undefined {
     return this.data.find((quote) => quote.quote_id === id);
   }
 
-  getAll(): Quote[] {
+  findAll(): Quote[] {
     return this.data;
   }
 }
