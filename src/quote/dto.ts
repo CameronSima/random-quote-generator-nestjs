@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsOptional, IsNumber, Min, Max } from 'class-validator';
+import { IsOptional, IsNumber, Min, Max, IsString } from 'class-validator';
 import { Quote } from './models';
 
 export class PaginatedQuoteQuery {
@@ -16,9 +16,26 @@ export class PaginatedQuoteQuery {
   @Max(100)
   limit?: number;
 
-  constructor(page?: number, limit?: number) {
+  @IsOptional()
+  @Type(() => String)
+  @IsString()
+  character?: string;
+
+  @IsOptional()
+  @Type(() => String)
+  @IsString()
+  text?: string;
+
+  constructor(
+    page?: number,
+    limit?: number,
+    character?: string,
+    text?: string,
+  ) {
     this.page = page || 1;
     this.limit = limit || 10;
+    this.character = character;
+    this.text = text;
   }
 }
 

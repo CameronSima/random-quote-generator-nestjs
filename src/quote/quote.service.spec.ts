@@ -29,7 +29,7 @@ describe('QuoteService', () => {
   });
 
   it('should return all quotes', () => {
-    const quotes = service.findAll(1, 10);
+    const { quotes, total } = service.findAll(1, 10);
     expect(quotes).toBeDefined();
     expect(quotes.length).toBe(10);
   });

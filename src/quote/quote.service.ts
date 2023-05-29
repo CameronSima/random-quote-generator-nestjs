@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Quote } from './models';
+import { Filter, Quote } from './models';
 import officeQuotes from '../data/office_quotes.json';
 
 @Injectable()
@@ -19,10 +19,26 @@ export class QuoteService {
     return this.data.find((quote) => quote.quote_id === id);
   }
 
-  findAll(page: number, limit: number): Quote[] {
+  findAll(
+    page: number,
+    limit: number,
+    filters: Filter<Quote>[] = [],
+  ): { quotes: Quote[]; total: number } {
     const startIndex = (page - 1) * limit;
-    const quotes = this.data.slice(startIndex, startIndex + limit);
-    return quotes;
+
+    // apply filters
+    const filteredData = filters.reduce(
+      (result, filter) => filter(result),
+      this.data,
+    );
+
+    // total is the length of the filtered data before pagination
+    const total = filteredData.length;
+
+    // apply pagination
+    const quotes = filteredData.slice(startIndex, startIndex + limit);
+
+    return { quotes, total };
   }
 
   getCount(): number {

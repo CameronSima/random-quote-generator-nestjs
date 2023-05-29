@@ -12,6 +12,11 @@ export class MockQuoteService {
     },
     {
       quote_id: 3,
+      quote: 'Donuts',
+      character: 'Homer Simpson',
+    },
+    {
+      quote_id: 4,
       quote: 'Excellent',
       character: 'Mr. Burns',
     },

@@ -8,10 +8,10 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { cp } from 'fs';
 import { PaginatedQuoteQuery, PaginatedQuoteResponse } from './dto';
-import { Quote } from './models';
+import { Filter, Quote } from './models';
 import { QuoteService } from './quote.service';
+import { filterCharacter, filterText } from './utils';
 
 @Controller('quote')
 export class QuoteController {
@@ -24,11 +24,20 @@ export class QuoteController {
 
   @Get('all')
   @UsePipes(new ValidationPipe({ transform: true }))
-  getAll(@Query() pagination: PaginatedQuoteQuery): PaginatedQuoteResponse {
-    const { page, limit } = pagination;
+  getAll(@Query() query: PaginatedQuoteQuery): PaginatedQuoteResponse {
+    const { page, limit, character, text } = query;
 
-    const quotes = this.quoteService.findAll(page, limit);
-    const total = this.quoteService.getCount();
+    const filters: Filter<Quote>[] = [];
+
+    if (character) {
+      filters.push(filterCharacter(character));
+    }
+
+    if (text) {
+      filters.push(filterText(text));
+    }
+
+    const { quotes, total } = this.quoteService.findAll(page, limit, filters);
     const count = quotes.length;
 
     const meta = {

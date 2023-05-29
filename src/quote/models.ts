@@ -3,3 +3,5 @@ export interface Quote {
   quote: string;
   character: string;
 }
+
+export type Filter<T> = (quotes: T[]) => T[];
