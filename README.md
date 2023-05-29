@@ -19,20 +19,20 @@ The Random Quote Generator is a NestJS application that provides a simple API fo
 
 - Pagination support for retrieving quotes
 - Query parameter support for searching quotes by text or character
-  Relevant code can be found in the `quotes` module.
-  `src/quotes/quotes.controller.ts`
-  `src/quotes/quotes.service.ts`
-  `src/quotes/utils.ts` - Quote filtering mechanism
+  Relevant code can be found in the `quotes` module:
+- `src/quote/quote.controller.ts`
+- `src/quote/quote.service.ts`
+- `src/quote/utils.ts` - Quote filtering mechanism
 
 ## Endpoints
 
 The following endpoints are available:
 
-- `GET /quotes/random`: Retrieves a random quote from "The Office".
-- `GET /quotes?text={searchText}`: Searches quotes containing the specified `searchText`.
-- `GET /quotes?character={characterName}`: Searches quotes spoken by the specified `characterName`.
-- `GET /quotes?text={searchText}&character={characterName}`: Searches quotes containing the specified `searchText` and spoken by the specified `characterName`.
-- `GET /quotes?page={pageNumber}&limit={pageSize}`: Retrieves a paginated list of quotes. The `pageNumber` and `pageSize` query parameters are optional and default to `1` and `10` respectively.
+- `GET /quote/random`: Retrieves a random quote from "The Office".
+- `GET /quote?text={searchText}`: Searches quotes containing the specified `searchText`.
+- `GET /quote?character={characterName}`: Searches quotes spoken by the specified `characterName`.
+- `GET /quote?text={searchText}&character={characterName}`: Searches quotes containing the specified `searchText` and spoken by the specified `characterName`.
+- `GET /quote?page={pageNumber}&limit={pageSize}`: Retrieves a paginated list of quotes. The `pageNumber` and `pageSize` query parameters are optional and default to `1` and `10` respectively.
 
 ## Installation
 
@@ -94,3 +94,5 @@ If I were to continue working on this project, here are some next steps I would 
 2. **Caching**: Implementing caching mechanisms can significantly improve performance by storing frequently accessed quotes in memory or using a distributed caching system like Redis. This reduces the load on the database and improves response times.
 3. **Dockerization**: Containerizing the application using Docker would enable easier deployment and ensure consistency across different environments.
 4. **Authentication and Authorization**: If this API were meant to be used by authenticated users, I would implement authentication and authorization mechanisms. This could involve using JWT (JSON Web Tokens) or other authentication strategies to secure the API endpoints.
+5. **Logging**: I would implement logging mechanisms to track errors and other events. This would be useful for debugging and monitoring the application.
+6. **API docs** - I would use a tool like Swagger to generate API documentation. This would make it easier for developers to understand the API and use it in their applications.
