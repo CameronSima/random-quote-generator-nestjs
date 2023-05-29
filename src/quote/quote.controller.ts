@@ -18,11 +18,6 @@ export class QuoteController {
   constructor(private readonly quoteService: QuoteService) {}
 
   @Get()
-  getRandom(): Quote {
-    return this.quoteService.findRandom();
-  }
-
-  @Get('all')
   @UsePipes(new ValidationPipe({ transform: true }))
   getAll(@Query() query: PaginatedQuoteQuery): PaginatedQuoteResponse {
     const { page, limit, character, text } = query;
@@ -51,6 +46,11 @@ export class QuoteController {
       data: quotes,
       meta,
     };
+  }
+
+  @Get('random')
+  getRandom(): Quote {
+    return this.quoteService.findRandom();
   }
 
   @Get(':id')

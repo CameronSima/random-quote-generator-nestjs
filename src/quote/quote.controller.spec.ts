@@ -38,11 +38,10 @@ describe('QuoteController', () => {
 
   it('should return all quotes', () => {
     const res = controller.getAll({ page: 1, limit: 10 });
-    console.log(res);
     expect(res).toBeDefined();
-    expect(res.data.length).toBe(3);
+    expect(res.data.length).toBe(4);
     expect(res.meta.page).toBe(1);
     expect(res.meta.limit).toBe(10);
-    expect(res.meta.total).toBe(3);
+    expect(res.meta.total).toBe(4);
   });
 });

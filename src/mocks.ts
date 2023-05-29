@@ -3,17 +3,17 @@ export class MockQuoteService {
     {
       quote_id: 1,
       quote: 'Eat my shorts',
-      character: 'Bart Simpson',
+      character: 'Bart',
     },
     {
       quote_id: 2,
       quote: "D'oh",
-      character: 'Homer Simpson',
+      character: 'Homer',
     },
     {
       quote_id: 3,
       quote: 'Donuts',
-      character: 'Homer Simpson',
+      character: 'Homer',
     },
     {
       quote_id: 4,
@@ -22,8 +22,8 @@ export class MockQuoteService {
     },
   ];
 
-  findAll(): any[] {
-    return this.quotes;
+  findAll(): { quotes: any[]; total: number } {
+    return { quotes: this.quotes, total: this.quotes.length };
   }
 
   findOne(id: number): any {

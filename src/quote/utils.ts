@@ -1,5 +1,7 @@
 import { Quote } from './models';
 
+// System for filtering quotes
+
 export function filterCharacter(character: string) {
   return (quotes: Quote[]) =>
     quotes.filter((q) => q.character.toLowerCase() === character.toLowerCase());

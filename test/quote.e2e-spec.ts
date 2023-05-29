@@ -15,9 +15,9 @@ describe('QuoteController (e2e)', () => {
     await app.init();
   });
 
-  it('/quote (GET)', () => {
+  it('/quote/random (GET)', () => {
     return request(app.getHttpServer())
-      .get('/quote')
+      .get('/quote/random')
       .expect(200)
       .expect((res) => {
         expect(res.body).toBeDefined();
@@ -62,9 +62,9 @@ describe('QuoteController (e2e)', () => {
       });
   });
 
-  it('/quote/all (GET)', () => {
+  it('/quote (GET) 200', () => {
     return request(app.getHttpServer())
-      .get('/quote/all')
+      .get('/quote')
       .expect(200)
       .expect((res) => {
         expect(res.body).toBeDefined();
@@ -72,9 +72,9 @@ describe('QuoteController (e2e)', () => {
       });
   });
 
-  it('/quote/all (GET) pagination', () => {
+  it('/quote (GET) (200 pagination query params)', () => {
     return request(app.getHttpServer())
-      .get('/quote/all?page=2&limit=25')
+      .get('/quote?page=2&limit=25')
       .expect(200)
       .expect((res) => {
         expect(res.body).toBeDefined();
@@ -86,9 +86,9 @@ describe('QuoteController (e2e)', () => {
       });
   });
 
-  it('/quote/all (GET) pagination (bad query params)', () => {
+  it('/quote (GET) pagination (400 bad query params)', () => {
     return request(app.getHttpServer())
-      .get('/quote/all?page=foo&limit=bar')
+      .get('/quote?page=foo&limit=bar')
       .expect(400)
       .expect((res) => {
         expect(res.body).toBeDefined();
@@ -105,9 +105,9 @@ describe('QuoteController (e2e)', () => {
       });
   });
 
-  it('/quote/all (GET) pagination (excessive page size)', () => {
+  it('/quote (GET) pagination (400 excessive page size)', () => {
     return request(app.getHttpServer())
-      .get('/quote/all?limit=999')
+      .get('/quote?limit=999')
       .expect(400)
       .expect((res) => {
         expect(res.body).toBeDefined();
@@ -118,9 +118,9 @@ describe('QuoteController (e2e)', () => {
       });
   });
 
-  it('/quote/all (GET) pagination (end of pages)', () => {
+  it('/quote (GET) pagination (200 end of pages)', () => {
     return request(app.getHttpServer())
-      .get('/quote/all?page=999')
+      .get('/quote?page=999')
       .expect(200)
       .expect((res) => {
         expect(res.body).toBeDefined();
