@@ -81,10 +81,56 @@ The project relies on the following dependencies:
 
 Example usage:
 
-- Retrieve a random quote: `GET http://localhost:3000/quotes/random`
+- Retrieve a random quote: `GET http://localhost:3000/quote/random`
 - Search quotes by text: `GET http://localhost:3000/quote?text=cousin%20mose`
+
+Example response:
+
+```json
+{
+  "data": [
+    {
+      "quote_id": 877,
+      "quote": "My cousin Mose’s best friend was a dog. One day, he was foaming at the mouth, so I had to shoot him dead. Turns out, he had only eaten one of Mose’s cream pies. Did I feel bad for killing him? No. That’s how you deal with a thief.",
+      "character": "Dwight"
+    },
+    {
+      "quote_id": 1137,
+      "quote": "Next up, my cousin Mose. Mose could make a great paper salesman. He’s got a natural fear of paper, which would motivate him to get as much of it out of this office as possible. I’ve got big expectations, Mose-wise.",
+      "character": "Dwight"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "limit": 10,
+    "total": 2,
+    "count": 2
+  }
+}
+```
+
 - Search quotes by character: `GET http://localhost:3000/quote?character=michael`
 - Search quotes by text and character: `GET http://localhost:3000/quote?text=I%20can%20do%20it&character=dwight`
+
+Example response:
+
+```json
+{
+  "data": [
+    {
+      "quote_id": 747,
+      "quote": "Yes. I can do it. I’m your man.",
+      "character": "Dwight"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "limit": 10,
+    "total": 1,
+    "count": 1
+  }
+}
+```
 
 ## Next Steps
 
@@ -96,3 +142,7 @@ If I were to continue working on this project, here are some next steps I would 
 4. **Authentication and Authorization**: If this API were meant to be used by authenticated users, I would implement authentication and authorization mechanisms. This could involve using JWT (JSON Web Tokens) or other authentication strategies to secure the API endpoints.
 5. **Logging**: I would implement logging mechanisms to track errors and other events. This would be useful for debugging and monitoring the application.
 6. **API docs** - I would use a tool like Swagger to generate API documentation. This would make it easier for developers to understand the API and use it in their applications.
+
+```
+
+```
