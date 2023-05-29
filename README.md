@@ -90,7 +90,7 @@ Example usage:
 
 If I were to continue working on this project, here are some next steps I would consider:
 
-1. **Database Integration**: Currently, the quotes are stored in a JSON file in memory. To enhance scalability and persistence, I would integrate a database such as PostgreSQL or MongoDB. This allows for efficient storage, querying, and management of the quotes.
+1. **Database Integration**: Currently, the quotes are stored in a JSON file in memory. To enhance scalability and persistence, I would integrate a database such as PostgreSQL or MongoDB. This allows for efficient storage, querying, and management of the quotes. Also, adding additional endpoints for creating, updating, and deleting quotes could more practically be implemented.
 2. **Caching**: Implementing caching mechanisms can significantly improve performance by storing frequently accessed quotes in memory or using a distributed caching system like Redis. This reduces the load on the database and improves response times.
 3. **Dockerization**: Containerizing the application using Docker would enable easier deployment and ensure consistency across different environments.
 4. **Authentication and Authorization**: If this API were meant to be used by authenticated users, I would implement authentication and authorization mechanisms. This could involve using JWT (JSON Web Tokens) or other authentication strategies to secure the API endpoints.
